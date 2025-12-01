@@ -1,5 +1,5 @@
 // src/components/ATSMeter.tsx
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 
 type ATSMeterProps = {
   score: number;    // 0–100 ATS score

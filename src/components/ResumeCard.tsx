@@ -1,4 +1,4 @@
-import React from "react";
+
 import { useNavigate } from "react-router-dom";
 import { removeById } from "../lib/storage";
 import ATSMeter from "./ATSMeter";

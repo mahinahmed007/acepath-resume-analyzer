@@ -1,5 +1,5 @@
 // src/components/PDFPreview.tsx
-import React from "react";
+
 
 export default function PDFPreview({ thumbnail }: { thumbnail: string }) {
   // The thumbnail is expected to be a dataURL or image URL

@@ -48,7 +48,7 @@ export async function extractTextFromPdf(file: File) {
     extractedText += content.items.map((it: any) => it.str).join(" ") + "\n";
   }
 
-  // Generate thumbnail
+  // Generate thumbnail from first page
   const firstPage = await pdf.getPage(1);
   const viewport = firstPage.getViewport({ scale: 2 });
 
@@ -58,9 +58,11 @@ export async function extractTextFromPdf(file: File) {
   canvas.width = viewport.width;
   canvas.height = viewport.height;
 
+  // ⭐ FIXED: pdfjs requires { canvas } now
   await firstPage.render({
-    canvasContext: ctx as any,
-    viewport: viewport as any,
+    canvasContext: ctx,
+    viewport,
+    canvas, // REQUIRED FIELD
   }).promise;
 
   const thumbnail = canvas.toDataURL("image/png");
@@ -78,7 +80,10 @@ export function analyzeText(text: string) {
   const phone = extractPhone(text);
   const name = extractName(text);
 
-  const atsScore = Math.min(100, skills.length * 10 + (email ? 10 : 0) + (phone ? 10 : 0));
+  const atsScore = Math.min(
+    100,
+    skills.length * 10 + (email ? 10 : 0) + (phone ? 10 : 0)
+  );
 
   const strengths = [
     skills.length > 5 ? "Strong technical skill set" : "Decent skill base",
