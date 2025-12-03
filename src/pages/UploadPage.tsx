@@ -67,6 +67,7 @@ export default function UploadPage() {
     hover:shadow-lg
     transition-all duration-300
   "
+   <Link href="http://localhost:3000/dashboard">
 >
   Back to Dashboard 
 </button>
